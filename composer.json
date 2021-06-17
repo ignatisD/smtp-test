@@ -1,0 +1,13 @@
+{
+    "name": "iggi/smtptester",
+    "authors": [
+        {
+            "name": "iggi",
+            "email": "ignatisnb@gmail.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.5",
+        "vlucas/phpdotenv": "^5.3"
+    }
+}
