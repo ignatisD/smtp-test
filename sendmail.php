@@ -8,8 +8,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 $mail = new PHPMailer();
 $mail->IsSMTP();
 
-$mail->Host = $_ENV["SMTP_HOST"];
-$mail->Port = $_ENV["SMTP_PORT"];
+$mail->Host = isset($_ENV["SMTP_HOST"]) ? $_ENV["SMTP_HOST"] : "mailhog.thedemo.app";
+$mail->Port = isset($_ENV["SMTP_PORT"]) ? $_ENV["SMTP_PORT"] : "1025";
 if (!empty($_ENV["SMTP_SECURE"])) {
     $mail->SMTPSecure = $_ENV["SMTP_SECURE"];
 }
@@ -22,11 +22,11 @@ if (!empty($_ENV["SMTP_PASSWORD"])) {
 $mail->SMTPDebug = !empty($_ENV["SMTP_DEBUG"]) ? $_ENV["SMTP_DEBUG"] : 0;
 $mail->SMTPOptions = ["ssl" => ["verify_peer" => false, "verify_peer_name" => false, "allow_self_signed" => true]];
 
-$mail->From      = $_ENV["SMTP_USERNAME"];
+$mail->From      = isset($_ENV["SMTP_USERNAME"]) ? $_ENV["SMTP_USERNAME"] : "tester@".gethostname().".app";
 $mail->FromName  = "Email Tester";
 $mail->Subject   = "SMTP Email testing";
 
-$mailSendTo = $_ENV["SMTP_TESTER"];
+$mailSendTo = isset($_ENV["SMTP_TESTER"]) ? $_ENV["SMTP_TESTER"] : "example@example.com";
 $baseEmailSendTo = base64_encode($mailSendTo);
 
 $mail->msgHTML("<h1>Hello world!</h1>");
